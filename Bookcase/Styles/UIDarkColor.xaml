@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!---Background Colors-->
+    <Color x:Key="defaultBackColor">#191970</Color>
+    <Color x:Key="defaultBackColor1">#4169E1</Color>
+   
+    <!---Text Color-->
+    <SolidColorBrush  x:Key="TexColor">#FFFFFF</SolidColorBrush>
+    
+    <Image x:Key="SettingImage" Source="settings.png"/>
+    
+    
+</ResourceDictionary>

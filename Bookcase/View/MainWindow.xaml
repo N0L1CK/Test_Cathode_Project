@@ -1,0 +1,200 @@
+﻿<Window x:Class="Bookcase.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bookcase.View"
+        mc:Ignorable="d"
+        Title="Bookcase" Height="650" Width="400"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown">
+    <Border CornerRadius="10" BorderThickness="1">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="{DynamicResource defaultBackColor1}" Offset="0"/>
+                <GradientStop Color="{DynamicResource defaultBackColor}" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="{DynamicResource defaultBackColor1}" Offset="0"/>
+                <GradientStop Color="{DynamicResource defaultBackColor}" Offset="0.75"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="Settings" 
+                        BorderThickness="0"
+                        Width="30" Height="30"
+                        Grid.Column="0"
+                        Background="Transparent"
+                        Click="Settings_Click">
+                    <Image Source="../Styles/settings.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality">
+                    </Image>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="18"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <TextBlock Text="BOOKCASE"
+                        FontSize="15"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Margin="10,0,0,0" 
+                        Foreground="{DynamicResource TexColor}" />
+                <Button x:Name="ButtonMinimalize"   
+                        BorderThickness="0"
+                        Background="dodgerblue"
+                        Content="_"
+                        Foreground="White" 
+                        FontSize="15" 
+                        Cursor="Hand"
+                        Grid.Column="2"
+                        Click="ButtonMinimalize_Click"
+                        Margin="3">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="18"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="ButtonClose" 
+                        Background="red" 
+                        BorderThickness="0"
+                        Content="X"
+                        Foreground="White" 
+                        FontSize="15" 
+                        Cursor="Hand"
+                        Grid.Column="3"
+                        Click="ButtonClose_Click"
+                        Margin="3">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="18"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+            <ComboBox x:Name="SortingBox" Grid.Row="1" Width="200" Margin="2" SelectionChanged="SortingBox_SelectionChanged" SelectedIndex="0">
+                <ComboBoxItem Content="Author" />
+                <ComboBoxItem Content="Genre"/>
+                <ComboBoxItem Content="DateEdition"/>
+            </ComboBox>
+                    <Grid Grid.Row="2" HorizontalAlignment="Center">
+                <ListBox  x:Name="BooksBox"
+                         Width="380"
+                         ItemsSource="{Binding Books}"
+                         SelectedItem="{Binding SelectedBook}"
+                         BorderThickness="0"
+                         Margin="0,20,0,0"
+                         Background="Transparent">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="#6285f0" 
+                                    CornerRadius="20" 
+                                    BorderBrush="LightBlue" 
+                                    BorderThickness="1" Margin="25,0,0,0" HorizontalAlignment="Center">
+                                <StackPanel Width="290" Margin="10" HorizontalAlignment="Center">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                        <TextBlock Text ="Name: " Grid.Column="0" FontSize="16" Foreground="{StaticResource TexColor}"/>
+                                        <TextBlock Text ="Author: " Grid.Row="1" Grid.Column="0" FontSize="16" Foreground="{StaticResource TexColor}"/>
+                                        <TextBlock Text ="Date Edition: " Grid.Row="2" Grid.Column="0" FontSize="16" Foreground="{StaticResource TexColor}"/>
+                                        <TextBlock Text ="Genre: " Grid.Row="3" Grid.Column="0" FontSize="16" Foreground="{StaticResource TexColor}"/>
+                                        <TextBlock Grid.Column="1"  Foreground="{StaticResource TexColor}" FontSize="16" Text="{Binding Path=Name}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center">
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Foreground="{StaticResource TexColor}" FontSize="16" Text="{Binding Path=Author}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" Foreground="{StaticResource TexColor}" FontSize="16" Text="{Binding Path=DateEdition}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" Foreground="{StaticResource TexColor}" FontSize="16" Text="{Binding Path=Genre}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                                    </Grid>
+                                </StackPanel>
+
+                            </Border>
+                            
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.Resources>
+                        <Style TargetType = "ScrollBar">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Width" Value="10"/>
+                        </Style>
+                    </ListBox.Resources>
+                </ListBox>
+
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button  
+                    
+                    Background="LightGreen" 
+                    BorderThickness="0"
+                    Command="{Binding EditCommand}" Grid.Column="0" CommandParameter="{Binding SelectedBook}">
+                    <Image Source="../Styles/edit-button.png" Height="28" Width="28" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button 
+                    Background="dodgerblue" 
+                    BorderThickness="0"
+                    Command="{Binding AddCommand}" Grid.Column="1">
+                    <Image Source="../Styles/plus.png" Height="28" Width="28" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button 
+                   
+                    Background="red" 
+                    BorderThickness="0"
+                    Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedBook}" Grid.Column="2">
+                    <Image Source="../Styles/bin.png" Height="28" Width="28" RenderOptions.BitmapScalingMode="HighQuality"/>
+
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+            
+        </Grid>
+    </Border>
+</Window>
