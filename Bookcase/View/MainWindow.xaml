@@ -115,9 +115,15 @@
                         <DataTemplate>
                             <Border 
                                     CornerRadius="20" 
-                                    BorderBrush="#453C67" 
-                                    BorderThickness="1" Margin="25,0,0,0" 
+                                     
+                                    BorderThickness="1" Margin="25,5,0,0" 
                                     HorizontalAlignment="Center">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="{DynamicResource defaultBackColor1}" Offset="0.1"/>
+                                        <GradientStop Color="{DynamicResource defaultBackColor3}" Offset="0.4"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
                                 <StackPanel Width="290" 
                                             Margin="10" 
                                             HorizontalAlignment="Center" >
