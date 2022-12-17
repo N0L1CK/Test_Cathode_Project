@@ -42,11 +42,9 @@ namespace Bookcase.ViewModel
                         BookWindow bookWindow = new(new Book());
                         if (bookWindow.ShowDialog() == true)
                         {
-
                             Book book = bookWindow.Book;
                             try
                             {
-
                                 db.Books.Add(book);
                                 db.SaveChanges();
                             }
@@ -104,7 +102,9 @@ namespace Bookcase.ViewModel
                   {
                       // получаем выделенный объект
                       if (obj is not Book book) return;
-                      var res = (MessageBox.Show("Are you sure?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No)).ToString();
+                      var res = (MessageBox.Show("Are you sure?", "Delete", 
+                          MessageBoxButton.YesNo, MessageBoxImage.Question, 
+                          MessageBoxResult.No)).ToString();
                       if (res == "Yes")
                       {
                           db.Books.Remove(book);

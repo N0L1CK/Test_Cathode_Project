@@ -18,7 +18,7 @@ namespace Bookcase.View
 
             this.Book = book;
             DataContext = book;
-
+            
         }
         /// <summary>
         /// Button Accept Event
@@ -58,6 +58,5 @@ namespace Bookcase.View
             Save.IsEnabled = _noOfErrorsOnScreen > 0 ? false : true;
 
         }
-
     }
 }
