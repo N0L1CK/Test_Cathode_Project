@@ -94,7 +94,7 @@
                      Width="200"
                      Margin="0,5,0,0" Validation.ErrorTemplate="{StaticResource validationFailed}" Validation.Error="Save_Error">
                 <TextBox.Text>
-                    <Binding Path="DateEdition" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="DateEdition" NotifyOnValidationError="True">
                         <Binding.ValidationRules>
                             <DataErrorValidationRule />
                         </Binding.ValidationRules>
