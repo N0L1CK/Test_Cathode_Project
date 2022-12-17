@@ -18,14 +18,16 @@
     <Border Height="650" Width="400" CornerRadius="10" BorderThickness="1">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="{DynamicResource defaultBackColor1}" Offset="0"/>
-                <GradientStop Color="{DynamicResource defaultBackColor}" Offset="1"/>
+                <GradientStop Color="{DynamicResource defaultBackColor2}" Offset="0.15"/>
+                <GradientStop Color="{DynamicResource defaultBackColor}" Offset="0.5"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                 <GradientStop Color="{DynamicResource defaultBackColor1}" Offset="0"/>
-                <GradientStop Color="{DynamicResource defaultBackColor}" Offset="0.75"/>
+                <GradientStop Color="{DynamicResource defaultBackColor}" Offset="0.6"/>
+                <GradientStop Color="{DynamicResource defaultBackColor3}" Offset="1"/>
+
             </LinearGradientBrush>
         </Border.Background>
         <Grid>

@@ -4,7 +4,9 @@
     <!---Background Colors-->
     <Color x:Key="defaultBackColor">#191970</Color>
     <Color x:Key="defaultBackColor1">#4169E1</Color>
-   
+    <Color x:Key="defaultBackColor2">#7793e6</Color>
+    <Color x:Key="defaultBackColor3">#031240</Color>
+
     <!---Text Color-->
     <SolidColorBrush  x:Key="TexColor">#FFFFFF</SolidColorBrush>
     
