@@ -137,8 +137,6 @@ namespace Bookcase.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-       
-        
     }
 
 }
