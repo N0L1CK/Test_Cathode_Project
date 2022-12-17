@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bookcase.View"
         mc:Ignorable="d"
-        Title="Bookcase" Height="650" Width="400"
+        Title="Bookcase" Height="670" Width="420"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
-    <Border CornerRadius="10" BorderThickness="1">
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.8" 
+                Color="DarkBlue" />
+    </Window.Effect>
+    <Border Height="650" Width="400" CornerRadius="10" BorderThickness="1">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                 <GradientStop Color="{DynamicResource defaultBackColor1}" Offset="0"/>
@@ -96,7 +100,7 @@
                 <ComboBoxItem Content="Genre"/>
                 <ComboBoxItem Content="DateEdition"/>
             </ComboBox>
-                    <Grid Grid.Row="2" HorizontalAlignment="Center">
+            <Grid Grid.Row="2" HorizontalAlignment="Center">
                 <ListBox  x:Name="BooksBox"
                          Width="380"
                          ItemsSource="{Binding Books}"
@@ -107,37 +111,98 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="#6285f0" 
+                            <Border 
                                     CornerRadius="20" 
-                                    BorderBrush="LightBlue" 
-                                    BorderThickness="1" Margin="25,0,0,0" HorizontalAlignment="Center">
-                                <StackPanel Width="290" Margin="10" HorizontalAlignment="Center">
+                                    BorderBrush="#453C67" 
+                                    BorderThickness="1" Margin="25,0,0,0" 
+                                    HorizontalAlignment="Center">
+                                <StackPanel Width="290" 
+                                            Margin="10" 
+                                            HorizontalAlignment="Center" >
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                        <TextBlock Text ="Name: " Grid.Column="0" FontSize="16" Foreground="{StaticResource TexColor}"/>
-                                        <TextBlock Text ="Author: " Grid.Row="1" Grid.Column="0" FontSize="16" Foreground="{StaticResource TexColor}"/>
-                                        <TextBlock Text ="Date Edition: " Grid.Row="2" Grid.Column="0" FontSize="16" Foreground="{StaticResource TexColor}"/>
-                                        <TextBlock Text ="Genre: " Grid.Row="3" Grid.Column="0" FontSize="16" Foreground="{StaticResource TexColor}"/>
-                                        <TextBlock Grid.Column="1"  Foreground="{StaticResource TexColor}" FontSize="16" Text="{Binding Path=Name}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center">
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text ="Name: " 
+                                                   Grid.Column="0" 
+                                                   FontSize="16" 
+                                                   Foreground="{StaticResource TexColor}"/>
+                                        <TextBlock Text ="Author: " 
+                                                   Grid.Row="1" 
+                                                   Grid.Column="0" 
+                                                   FontSize="16" 
+                                                   Foreground="{StaticResource TexColor}"/>
+                                        <TextBlock 
+                                            Text ="Date Edition: " 
+                                            Grid.Row="2" Grid.Column="0" 
+                                            FontSize="16" 
+                                            Foreground="{StaticResource TexColor}"/>
+                                        <TextBlock 
+                                            Text ="Genre: " 
+                                            Grid.Row="3" 
+                                            Grid.Column="0" 
+                                            FontSize="16" 
+                                            Foreground="{StaticResource TexColor}"/>
+                                        <TextBlock Grid.Column="1"  
+                                                   Foreground="{StaticResource TexColor}" 
+                                                   FontSize="16" Text="{Binding Path=Name}" 
+                                                   HorizontalAlignment="Center" 
+                                                   TextWrapping="Wrap" TextAlignment="Center">
                                         </TextBlock>
-                                        <TextBlock Grid.Row="1" Grid.Column="1" Foreground="{StaticResource TexColor}" FontSize="16" Text="{Binding Path=Author}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
-                                        <TextBlock Grid.Row="2" Grid.Column="1" Foreground="{StaticResource TexColor}" FontSize="16" Text="{Binding Path=DateEdition}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
-                                        <TextBlock Grid.Row="3" Grid.Column="1" Foreground="{StaticResource TexColor}" FontSize="16" Text="{Binding Path=Genre}" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                                        <TextBlock Grid.Row="1" 
+                                                   Grid.Column="1" 
+                                                   Foreground="{StaticResource TexColor}" 
+                                                   FontSize="16" Text="{Binding Path=Author}" 
+                                                   HorizontalAlignment="Center" 
+                                                   TextWrapping="Wrap" TextAlignment="Center"/>
+                                        <TextBlock Grid.Row="2" 
+                                                   Grid.Column="1" 
+                                                   Foreground="{StaticResource TexColor}" 
+                                                   FontSize="16" Text="{Binding Path=DateEdition}" 
+                                                   HorizontalAlignment="Center" 
+                                                   TextWrapping="Wrap" TextAlignment="Center"/>
+                                        <TextBlock Name="TBGenre" 
+                                                   Grid.Row="3" 
+                                                   Grid.Column="1" 
+                                                   Foreground="{StaticResource TexColor}" 
+                                                   FontSize="16" Text="{Binding Path=Genre}" 
+                                                   HorizontalAlignment="Center" 
+                                                   TextWrapping="Wrap" TextAlignment="Center"/>
+
                                     </Grid>
                                 </StackPanel>
-
+                                <Border.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="roman">
+                                                <Setter Property="Border.Background" Value="#C147E9" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="роман">
+                                                <Setter Property="Border.Background" Value="#C147E9" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="fantastic">
+                                                <Setter Property="Border.Background" Value="#6D67E4" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="фантастика">
+                                                <Setter Property="Border.Background" Value="#6D67E4" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Border.Effect>
+                                    <DropShadowEffect />
+                                </Border.Effect>
                             </Border>
-                            
+
+
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     <ListBox.Resources>
@@ -160,9 +225,13 @@
                     
                     Background="LightGreen" 
                     BorderThickness="0"
-                    Command="{Binding EditCommand}" Grid.Column="0" CommandParameter="{Binding SelectedBook}">
-                    <Image Source="../Styles/edit-button.png" Height="28" Width="28" RenderOptions.BitmapScalingMode="HighQuality"/>
-                    
+                    Command="{Binding EditCommand}" 
+                    Grid.Column="0" 
+                    CommandParameter="{Binding SelectedBook}">
+                    <Image Source="../Styles/edit-button.png" 
+                           Height="28" Width="28" 
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -173,7 +242,9 @@
                     Background="dodgerblue" 
                     BorderThickness="0"
                     Command="{Binding AddCommand}" Grid.Column="1">
-                    <Image Source="../Styles/plus.png" Height="28" Width="28" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="../Styles/plus.png" 
+                           Height="28" Width="28"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -184,8 +255,11 @@
                    
                     Background="red" 
                     BorderThickness="0"
-                    Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedBook}" Grid.Column="2">
-                    <Image Source="../Styles/bin.png" Height="28" Width="28" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    Command="{Binding DeleteCommand}" 
+                    CommandParameter="{Binding SelectedBook}" Grid.Column="2">
+                    <Image Source="../Styles/bin.png" 
+                           Height="28" Width="28" 
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
 
                     <Button.Resources>
                         <Style TargetType="Border">
@@ -194,7 +268,6 @@
                     </Button.Resources>
                 </Button>
             </Grid>
-            
         </Grid>
     </Border>
 </Window>

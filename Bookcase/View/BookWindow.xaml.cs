@@ -29,6 +29,7 @@ namespace Bookcase.View
         {
             DialogResult = true;
         }
+
         /// <summary>
         /// Move Window Mouse Event
         /// </summary>
@@ -41,6 +42,7 @@ namespace Bookcase.View
                 DragMove();
             }
         }
+
         /// <summary>
         /// Count of error text box ValidationError Event
         /// </summary>

@@ -90,13 +90,13 @@ namespace Bookcase.Model
                         }
                         break;
                     case "Author":
-                        if (isNumeric(Author))
+                        if (IsNumeric(Author))
                         {
                             error = "Wrong author";
                         }
                         break;
                     case "Genre":
-                        if (isNumeric(Genre))
+                        if (IsNumeric(Genre))
                         {
                             error = "Wrong genre";
                         }
@@ -109,10 +109,10 @@ namespace Bookcase.Model
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-        public bool isNumeric(string? s)
+
+        public static bool IsNumeric(string? s)
         {
 
             if (!String.IsNullOrWhiteSpace(s))

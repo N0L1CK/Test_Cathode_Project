@@ -17,8 +17,10 @@ namespace Bookcase.ViewModel
         Command? addCommand;
         Command? editCommand;
         Command? deleteCommand;
-
+        private Book? selectedBook;
         public ObservableCollection<Book> Books { get; set; }
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public AppViewModel()
         {
             db.Database.EnsureCreated();
@@ -34,18 +36,17 @@ namespace Bookcase.ViewModel
         {
             get
             {
-            return addCommand ??= new Command((o) =>
+            return addCommand ??= new Command((obj) =>
                 {
                     
                     BookWindow bookWindow = new(new Book());
                     if (bookWindow.ShowDialog() == true)
                     {
 
-
-
                             Book book = bookWindow.Book;
                             try
                             {
+
                                 db.Books.Add(book);
                                 db.SaveChanges();
                             }
@@ -53,8 +54,6 @@ namespace Bookcase.ViewModel
                             {
                                 Console.WriteLine(e.Message);
                             }
-
-
                     }
                 });
             }
@@ -116,7 +115,7 @@ namespace Bookcase.ViewModel
             }
         }
 
-        private Book? selectedBook;
+
         /// <summary>
         /// Selection For Delete or Edit
         /// </summary>
@@ -132,13 +131,14 @@ namespace Bookcase.ViewModel
         /// <summary>
         /// Declare the event
         /// </summary>
-        public event PropertyChangedEventHandler? PropertyChanged;
+       
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-
+       
+        
     }
 
 }
