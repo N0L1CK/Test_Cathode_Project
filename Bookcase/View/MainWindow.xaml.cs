@@ -19,7 +19,6 @@ namespace Bookcase.View
             InitializeComponent();
             DataContext = new AppViewModel();
             BooksBox.Items.SortDescriptions.Add(new SortDescription("Author", ListSortDirection.Ascending));
-
         }
         /// <summary>
         /// Move Window Mouse Event
@@ -73,7 +72,6 @@ namespace Bookcase.View
         }
         private void Sort(string? SortProperty)
         {
-
             if (SortProperty != null && BooksBox != null)
             {
                 BooksBox.Items.SortDescriptions[0] = new SortDescription(SortProperty, ListSortDirection.Ascending);

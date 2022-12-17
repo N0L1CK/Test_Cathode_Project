@@ -15,10 +15,8 @@ namespace Bookcase.View
         public BookWindow(Book book)
         {
             InitializeComponent();
-            
             this.Book = book;
             DataContext = book;
-            
         }
         /// <summary>
         /// Button Accept Event

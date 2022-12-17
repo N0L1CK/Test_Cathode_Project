@@ -37,23 +37,15 @@ namespace Bookcase.ViewModel
             get
             {
                 return addCommand ??= new Command((obj) =>
+                {
+                    BookWindow bookWindow = new(new Book());
+                    if (bookWindow.ShowDialog() == true)
                     {
-
-                        BookWindow bookWindow = new(new Book());
-                        if (bookWindow.ShowDialog() == true)
-                        {
-                            Book book = bookWindow.Book;
-                            try
-                            {
-                                db.Books.Add(book);
-                                db.SaveChanges();
-                            }
-                            catch (Exception e)
-                            {
-                                Console.WriteLine(e.Message);
-                            }
-                        }
-                    });
+                        Book book = bookWindow.Book;
+                        db.Books.Add(book);
+                        db.SaveChanges();
+                    }
+                });
             }
         }
         /// <summary>
@@ -64,31 +56,29 @@ namespace Bookcase.ViewModel
             get
             {
                 return editCommand ??= new Command((selectedItem) =>
-                  {
-                      // получаем выделенный объект
-                      if (selectedItem is not Book book) return;
-                      Book vm = new()
-                      {
-                          Id = book.Id,
-                          Name = book.Name,
-                          Author = book.Author,
-                          DateEdition = book.DateEdition,
-                          Genre = book.Genre
-                      };
-                      BookWindow bookWindow = new(vm);
+                {
+                    if (selectedItem is not Book book) return;
+                    Book vm = new()
+                    {
+                        Id = book.Id,
+                        Name = book.Name,
+                        Author = book.Author,
+                        DateEdition = book.DateEdition,
+                        Genre = book.Genre
+                    };
+                    BookWindow bookWindow = new(vm);
 
+                    if (bookWindow.ShowDialog() == true)
+                    {
+                        book.Name = bookWindow.Book.Name;
+                        book.Author = bookWindow.Book.Author;
+                        book.DateEdition = bookWindow.Book.DateEdition;
+                        book.Genre = bookWindow.Book.Genre;
 
-                      if (bookWindow.ShowDialog() == true)
-                      {
-                          book.Name = bookWindow.Book.Name;
-                          book.Author = bookWindow.Book.Author;
-                          book.DateEdition = bookWindow.Book.DateEdition;
-                          book.Genre = bookWindow.Book.Genre;
-
-                          db.Entry(book).State = EntityState.Modified;
-                          db.SaveChanges();
-                      }
-                  }, (selectedItem) => Books.Count > 0);
+                        db.Entry(book).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }, (selectedItem) => Books.Count > 0);
             }
         }
         /// <summary>
@@ -99,18 +89,17 @@ namespace Bookcase.ViewModel
             get
             {
                 return deleteCommand ??= new Command(obj =>
-                  {
-                      // получаем выделенный объект
-                      if (obj is not Book book) return;
-                      var res = (MessageBox.Show("Are you sure?", "Delete", 
-                          MessageBoxButton.YesNo, MessageBoxImage.Question, 
-                          MessageBoxResult.No)).ToString();
-                      if (res == "Yes")
-                      {
-                          db.Books.Remove(book);
-                          db.SaveChanges();
-                      }
-                  },
+                {
+                    if (obj is not Book book) return;
+                    var res = (MessageBox.Show("Are you sure?", "Delete", 
+                        MessageBoxButton.YesNo, MessageBoxImage.Question, 
+                        MessageBoxResult.No)).ToString();
+                    if (res == "Yes")
+                    {
+                        db.Books.Remove(book);
+                        db.SaveChanges();
+                    }
+                },
                 (obj) => Books.Count > 0);
             }
         }
