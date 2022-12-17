@@ -8,14 +8,14 @@ namespace Bookcase.Model
     public class Book : INotifyPropertyChanged, IDataErrorInfo
     {
 
-        
+
         public int Id { get; set; }
         private string? name;
         private int dateEdition;
         private string? author;
         private string? genre;
 
-       
+
 
         public string? Name
         {

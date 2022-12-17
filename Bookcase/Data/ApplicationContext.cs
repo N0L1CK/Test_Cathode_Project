@@ -13,7 +13,7 @@ namespace Bookcase.Data
         /// Configuration connection
         /// </summary>
         /// <param name="optionsBuilder"></param>
-        public ApplicationContext(IDbConnection connection) 
+        public ApplicationContext(IDbConnection connection)
         {
             dbConnection = connection;
         }
@@ -32,13 +32,13 @@ namespace Bookcase.Data
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Book>().Property(b=>b.Author).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<Book>().Property(b => b.Author).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<Book>().Property(b => b.Name).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<Book>().Property(b => b.Genre).IsRequired().HasMaxLength(50);
 
 
             base.OnModelCreating(modelBuilder);
         }
-        
+
     }
 }

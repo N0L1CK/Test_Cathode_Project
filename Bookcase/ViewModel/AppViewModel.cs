@@ -25,9 +25,9 @@ namespace Bookcase.ViewModel
         {
             db.Database.EnsureCreated();
             db.Books.Load();
-            
+
             Books = db.Books.Local.ToObservableCollection();
-         
+
         }
         /// <summary>
         /// Command Add Book
@@ -36,12 +36,12 @@ namespace Bookcase.ViewModel
         {
             get
             {
-            return addCommand ??= new Command((obj) =>
-                {
-                    
-                    BookWindow bookWindow = new(new Book());
-                    if (bookWindow.ShowDialog() == true)
+                return addCommand ??= new Command((obj) =>
                     {
+
+                        BookWindow bookWindow = new(new Book());
+                        if (bookWindow.ShowDialog() == true)
+                        {
 
                             Book book = bookWindow.Book;
                             try
@@ -54,8 +54,8 @@ namespace Bookcase.ViewModel
                             {
                                 Console.WriteLine(e.Message);
                             }
-                    }
-                });
+                        }
+                    });
             }
         }
         /// <summary>
@@ -90,7 +90,7 @@ namespace Bookcase.ViewModel
                           db.Entry(book).State = EntityState.Modified;
                           db.SaveChanges();
                       }
-                  },(selectedItem) => Books.Count > 0);
+                  }, (selectedItem) => Books.Count > 0);
             }
         }
         /// <summary>
@@ -105,7 +105,7 @@ namespace Bookcase.ViewModel
                       // получаем выделенный объект
                       if (obj is not Book book) return;
                       var res = (MessageBox.Show("Are you sure?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No)).ToString();
-                      if (res == "Yes") 
+                      if (res == "Yes")
                       {
                           db.Books.Remove(book);
                           db.SaveChanges();
@@ -131,7 +131,7 @@ namespace Bookcase.ViewModel
         /// <summary>
         /// Declare the event
         /// </summary>
-       
+
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)

@@ -13,13 +13,13 @@ namespace Bookcase.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new AppViewModel();
             BooksBox.Items.SortDescriptions.Add(new SortDescription("Author", ListSortDirection.Ascending));
-            
+
         }
         /// <summary>
         /// Move Window Mouse Event
@@ -28,7 +28,7 @@ namespace Bookcase.View
         /// <param name="e"></param>
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed) 
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
             }
@@ -73,12 +73,12 @@ namespace Bookcase.View
         }
         private void Sort(string? SortProperty)
         {
-            
+
             if (SortProperty != null && BooksBox != null)
             {
                 BooksBox.Items.SortDescriptions[0] = new SortDescription(SortProperty, ListSortDirection.Ascending);
             }
         }
-        
+
     }
 }
