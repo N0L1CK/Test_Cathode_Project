@@ -1,5 +1,4 @@
 ﻿using Bookcase.Data;
-using Bookcase.Interfaces;
 using Bookcase.Model;
 using Bookcase.View;
 using Microsoft.EntityFrameworkCore;
@@ -29,8 +28,7 @@ namespace Bookcase.ViewModel
         }
         /// <summary>
         /// Command Add Book
-        /// </summary>
-        
+        /// </summary> 
         public ICommand AddCommand
         {
             get
@@ -83,7 +81,6 @@ namespace Bookcase.ViewModel
         /// <summary>
         /// Command for delete book 
         /// </summary>
-        
         public ICommand DeleteCommand
         {
             get
@@ -116,11 +113,9 @@ namespace Bookcase.ViewModel
                 OnPropertyChanged("SelectedBook");
             }
         }
-
         /// <summary>
         /// Declare the event
         /// </summary>
-
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
