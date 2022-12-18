@@ -93,7 +93,7 @@
                      Height="25"
                      Width="200"
                      Margin="0,5,0,0" Validation.ErrorTemplate="{StaticResource validationFailed}" 
-                     Validation.Error="Save_Error" LostKeyboardFocus="DateText_LostKeyboardFocus">
+                     Validation.Error="Save_Error" LostKeyboardFocus="DateText_LostKeyboardFocus" KeyDown="DateText_KeyDown">
                 <TextBox.Text>
                     <Binding Path="DateEdition" NotifyOnValidationError="True">
                         <Binding.ValidationRules>

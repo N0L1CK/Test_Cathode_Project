@@ -53,7 +53,7 @@ namespace Bookcase.View
             else
                 _noOfErrorsOnScreen--;
 
-            Save.IsEnabled = _noOfErrorsOnScreen <= 0;
+            Save.IsEnabled = _noOfErrorsOnScreen > 0 ? false : true;
 
         }
 
@@ -61,6 +61,20 @@ namespace Bookcase.View
         {
             if (DateText.Text.Length == 0)
                 DateText.Text = "0";
+        }
+
+        private void DateText_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (((int)e.Key >= 34 && (int)e.Key <= 43) || 
+               ((int)e.Key >= 74 && (int)e.Key <= 83))
+            {
+                e.Handled = false;
+            }
+            else 
+            {
+                e.Handled = true;
+            }
         }
     }
 }
