@@ -24,7 +24,7 @@ namespace Bookcase.Model
             {
 
                 name = ti.ToTitleCase(str: value.ToLower()).ToString();
-                
+
                 OnPropertyChanged(nameof(Name));
 
             }
@@ -64,6 +64,7 @@ namespace Bookcase.Model
         }
 
         public string Error => throw new NotImplementedException();
+
         /// <summary>
         /// Validation Add and Edit Book
         /// </summary>

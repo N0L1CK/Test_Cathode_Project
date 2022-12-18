@@ -2,7 +2,6 @@
 using Bookcase.Model;
 using Bookcase.View;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -25,9 +24,7 @@ namespace Bookcase.ViewModel
         {
             db.Database.EnsureCreated();
             db.Books.Load();
-
             Books = db.Books.Local.ToObservableCollection();
-
         }
         /// <summary>
         /// Command Add Book
@@ -91,8 +88,8 @@ namespace Bookcase.ViewModel
                 return deleteCommand ??= new Command(obj =>
                 {
                     if (obj is not Book book) return;
-                    var res = (MessageBox.Show("Are you sure?", "Delete", 
-                        MessageBoxButton.YesNo, MessageBoxImage.Question, 
+                    var res = (MessageBox.Show("Are you sure?", "Delete",
+                        MessageBoxButton.YesNo, MessageBoxImage.Question,
                         MessageBoxResult.No)).ToString();
                     if (res == "Yes")
                     {
