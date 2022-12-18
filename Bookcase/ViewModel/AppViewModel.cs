@@ -1,4 +1,5 @@
 ﻿using Bookcase.Data;
+using Bookcase.Interfaces;
 using Bookcase.Model;
 using Bookcase.View;
 using Microsoft.EntityFrameworkCore;
@@ -6,16 +7,16 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-
+using System.Windows.Input;
 
 namespace Bookcase.ViewModel
 {
     public class AppViewModel : INotifyPropertyChanged
     {
         readonly ApplicationContext db = new();
-        Command? addCommand;
-        Command? editCommand;
-        Command? deleteCommand;
+        ICommand? addCommand;
+        ICommand? editCommand;
+        ICommand? deleteCommand;
         private Book? selectedBook;
         public ObservableCollection<Book> Books { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -29,7 +30,8 @@ namespace Bookcase.ViewModel
         /// <summary>
         /// Command Add Book
         /// </summary>
-        public Command AddCommand
+        
+        public ICommand AddCommand
         {
             get
             {
@@ -48,7 +50,7 @@ namespace Bookcase.ViewModel
         /// <summary>
         /// Command Edit Book
         /// </summary>
-        public Command EditCommand
+        public ICommand EditCommand
         {
             get
             {
@@ -81,7 +83,8 @@ namespace Bookcase.ViewModel
         /// <summary>
         /// Command for delete book 
         /// </summary>
-        public Command DeleteCommand
+        
+        public ICommand DeleteCommand
         {
             get
             {
@@ -101,7 +104,6 @@ namespace Bookcase.ViewModel
             }
         }
 
-
         /// <summary>
         /// Selection For Delete or Edit
         /// </summary>
@@ -114,6 +116,7 @@ namespace Bookcase.ViewModel
                 OnPropertyChanged("SelectedBook");
             }
         }
+
         /// <summary>
         /// Declare the event
         /// </summary>
