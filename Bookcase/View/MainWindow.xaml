@@ -81,7 +81,7 @@
                     </Button.Resources>
                 </Button>
                 <Button x:Name="ButtonClose" 
-                        Background="red" 
+                        Background="#E52B50" 
                         BorderThickness="0"
                         Content="X"
                         Foreground="White" 
@@ -109,7 +109,8 @@
                          SelectedItem="{Binding SelectedBook}"
                          BorderThickness="0"
                          Margin="0,20,0,0"
-                         Background="Transparent">
+                         Background="Transparent" 
+                         VirtualizingPanel.ScrollUnit="Pixel">
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -184,23 +185,28 @@
                                                    FontSize="16" Text="{Binding Path=Genre}" 
                                                    HorizontalAlignment="Center" 
                                                    TextWrapping="Wrap" TextAlignment="Center"/>
-
                                     </Grid>
                                 </StackPanel>
                                 <Border.Style>
                                     <Style>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="roman">
+                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="Roman">
                                                 <Setter Property="Border.Background" Value="#C147E9" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="роман">
+                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="Роман">
                                                 <Setter Property="Border.Background" Value="#C147E9" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="fantastic">
+                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="Fantastic">
                                                 <Setter Property="Border.Background" Value="#6D67E4" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="фантастика">
+                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="Фантастика">
                                                 <Setter Property="Border.Background" Value="#6D67E4" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="Детектив">
+                                                <Setter Property="Border.Background" Value="#464451" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=TBGenre, Path=Text}" Value="Detectiv">
+                                                <Setter Property="Border.Background" Value="#464451" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -261,7 +267,7 @@
                 </Button>
                 <Button 
                    
-                    Background="red" 
+                    Background="#E52B50" 
                     BorderThickness="0"
                     Command="{Binding DeleteCommand}" 
                     CommandParameter="{Binding SelectedBook}" Grid.Column="2">

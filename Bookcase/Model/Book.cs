@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 
@@ -14,8 +15,7 @@ namespace Bookcase.Model
         private int dateEdition;
         private string? author;
         private string? genre;
-
-
+        readonly TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
 
         public string? Name
         {
@@ -23,7 +23,8 @@ namespace Bookcase.Model
             set
             {
 
-                name = value;
+                name = ti.ToTitleCase(str: value.ToLower()).ToString();
+                
                 OnPropertyChanged(nameof(Name));
 
             }
@@ -45,7 +46,7 @@ namespace Bookcase.Model
             set
             {
 
-                author = value;
+                author = ti.ToTitleCase(str: value.ToLower()).ToString();
                 OnPropertyChanged(nameof(Author));
 
             }
@@ -56,7 +57,7 @@ namespace Bookcase.Model
             set
             {
 
-                genre = value;
+                genre = ti.ToTitleCase(str: value.ToLower()).ToString();
                 OnPropertyChanged(nameof(Genre));
 
             }
@@ -72,7 +73,6 @@ namespace Bookcase.Model
         {
             get
             {
-
                 string error = String.Empty;
                 switch (columnName)
                 {
