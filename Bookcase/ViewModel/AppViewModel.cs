@@ -2,6 +2,7 @@
 using Bookcase.Model;
 using Bookcase.View;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -38,9 +39,17 @@ namespace Bookcase.ViewModel
                     BookWindow bookWindow = new(new Book());
                     if (bookWindow.ShowDialog() == true)
                     {
-                        Book book = bookWindow.Book;
-                        db.Books.Add(book);
-                        db.SaveChanges();
+                        try
+                        {
+                            Book book = bookWindow.Book;
+                            db.Books.Add(book);
+                            db.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show($"Error: {e.Message}", "Error",
+                                MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                        }
                     }
                 });
             }
@@ -71,9 +80,16 @@ namespace Bookcase.ViewModel
                         book.Author = bookWindow.Book.Author;
                         book.DateEdition = bookWindow.Book.DateEdition;
                         book.Genre = bookWindow.Book.Genre;
-
-                        db.Entry(book).State = EntityState.Modified;
-                        db.SaveChanges();
+                        try
+                        {
+                            db.Entry(book).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show($"Error: {e.Message}", "Error", 
+                                MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                        }
                     }
                 }, (selectedItem) => Books.Count > 0);
             }
@@ -93,8 +109,16 @@ namespace Bookcase.ViewModel
                         MessageBoxResult.No)).ToString();
                     if (res == "Yes")
                     {
-                        db.Books.Remove(book);
-                        db.SaveChanges();
+                        try
+                        {
+                            db.Books.Remove(book);
+                            db.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show($"Error: {e.Message}", "Error",
+                                MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                        }
                     }
                 },
                 (obj) => Books.Count > 0);
