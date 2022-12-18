@@ -53,8 +53,14 @@ namespace Bookcase.View
             else
                 _noOfErrorsOnScreen--;
 
-            Save.IsEnabled = _noOfErrorsOnScreen > 0 ? false : true;
+            Save.IsEnabled = _noOfErrorsOnScreen <= 0;
 
+        }
+
+        private void DateText_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (DateText.Text.Length == 0)
+                DateText.Text = "0";
         }
     }
 }

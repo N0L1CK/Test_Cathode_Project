@@ -22,9 +22,8 @@ namespace Bookcase.Model
             get { return name; }
             set
             {
-
-                name = ti.ToTitleCase(str: value.ToLower()).ToString();
-
+                if (name != value && value != null)
+                    name = ti.ToTitleCase(str: value.ToLower()).ToString();
                 OnPropertyChanged(nameof(Name));
 
             }
@@ -34,7 +33,7 @@ namespace Bookcase.Model
             get { return dateEdition; }
             set
             {
-
+                
                 dateEdition = value;
                 OnPropertyChanged(nameof(DateEdition));
 
@@ -45,8 +44,8 @@ namespace Bookcase.Model
             get { return author; }
             set
             {
-
-                author = ti.ToTitleCase(str: value.ToLower()).ToString();
+                if (author != value && value != null)
+                    author = ti.ToTitleCase(str: value.ToLower()).ToString();
                 OnPropertyChanged(nameof(Author));
 
             }
@@ -56,8 +55,8 @@ namespace Bookcase.Model
             get { return genre; }
             set
             {
-
-                genre = ti.ToTitleCase(str: value.ToLower()).ToString();
+                if (genre != value && value != null)
+                    genre = ti.ToTitleCase(str: value.ToLower()).ToString();
                 OnPropertyChanged(nameof(Genre));
 
             }
