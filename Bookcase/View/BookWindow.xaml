@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Bookcase.View"
         mc:Ignorable="d"
         Title="BookWindow" Height="290" Width="400"
         WindowStyle="None"
@@ -12,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
     <Window.Resources>
-        <ControlTemplate x:Key="validationFailed">
+        <ControlTemplate x:Key="ValidationFailed">
             <StackPanel Orientation="Horizontal">
                 <Border BorderBrush="red" BorderThickness="1">
                     <AdornedElementPlaceholder />
@@ -34,14 +33,14 @@
     <Border CornerRadius="10" BorderThickness="1">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="{DynamicResource defaultBackColor1}" Offset="0"/>
-                <GradientStop Color="{DynamicResource defaultBackColor}" Offset="1"/>
+                <GradientStop Color="{DynamicResource DefaultBackColor1}" Offset="0"/>
+                <GradientStop Color="{DynamicResource DefaultBackColor}" Offset="1"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="{DynamicResource defaultBackColor1}" Offset="0"/>
-                <GradientStop Color="{DynamicResource defaultBackColor}" Offset="0.75"/>
+                <GradientStop Color="{DynamicResource DefaultBackColor1}" Offset="0"/>
+                <GradientStop Color="{DynamicResource DefaultBackColor}" Offset="0.75"/>
             </LinearGradientBrush>
         </Border.Background>
         <Grid>
@@ -58,9 +57,9 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Name of the book" Grid.Row="1" FontSize="14" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="Publication Date" Grid.Row="2" FontSize="14" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="Author" Grid.Row="3" FontSize="14" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="Genre" Grid.Row="4" FontSize="14" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="Publication Date" Grid.Row="2" Grid.Column="0" FontSize="14" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="Author" Grid.Row="3" Grid.Column="0" FontSize="14" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="Genre" Grid.Row="4" Grid.Column="0" FontSize="14" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="NameText"
                      Grid.Column="1" 
                      Grid.Row="1"
@@ -72,7 +71,7 @@
                      BorderThickness="0,0,0,1"
                      Height="25"
                      Width="200"
-                     Margin="0,5,0,0" Validation.ErrorTemplate="{StaticResource validationFailed}" Validation.Error="Save_Error" >
+                     Margin="0,5,0,0" Validation.ErrorTemplate="{StaticResource ValidationFailed}" Validation.Error="Save_Error" >
                 <TextBox.Text>
                     <Binding Path="Name" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -92,7 +91,7 @@
                      BorderThickness="0,0,0,1"
                      Height="25"
                      Width="200"
-                     Margin="0,5,0,0" Validation.ErrorTemplate="{StaticResource validationFailed}" 
+                     Margin="0,5,0,0" Validation.ErrorTemplate="{StaticResource ValidationFailed}" 
                      Validation.Error="Save_Error" LostKeyboardFocus="DateText_LostKeyboardFocus" KeyDown="DateText_KeyDown">
                 <TextBox.Text>
                     <Binding Path="DateEdition" NotifyOnValidationError="True">
@@ -112,7 +111,7 @@
                      BorderThickness="0,0,0,1"
                      Height="25"
                      Width="200"
-                     Margin="0,5,0,0" Validation.ErrorTemplate="{StaticResource validationFailed}" Validation.Error="Save_Error">
+                     Margin="0,5,0,0" Validation.ErrorTemplate="{StaticResource ValidationFailed}" Validation.Error="Save_Error">
                 <TextBox.Text>
                     <Binding Path="Author" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -131,7 +130,7 @@
                      BorderThickness="0,0,0,1"
                      Height="25"
                      Width="200"
-                     Margin="0,5,0,0" Validation.ErrorTemplate="{StaticResource validationFailed}" Validation.Error="Save_Error">
+                     Margin="0,5,0,0" Validation.ErrorTemplate="{StaticResource ValidationFailed}" Validation.Error="Save_Error">
                 <TextBox.Text>
                     <Binding Path="Genre" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>

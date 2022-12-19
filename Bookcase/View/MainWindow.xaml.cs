@@ -9,9 +9,9 @@ using System.Windows.Input;
 namespace Bookcase.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
 
         public MainWindow()
@@ -66,15 +66,15 @@ namespace Bookcase.View
         /// <param name="e"></param>
         private void SortingBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxItem typeItem = (ComboBoxItem)SortingBox.SelectedItem;
-            string? SortProperty = typeItem.Content.ToString();
-            Sort(SortProperty);
+            var typeItem = (ComboBoxItem)SortingBox.SelectedItem;
+            var sortProperty = typeItem.Content.ToString();
+            Sort(sortProperty);
         }
-        private void Sort(string? SortProperty)
+        private void Sort(string? sortProperty)
         {
-            if (SortProperty != null && BooksBox != null)
+            if (sortProperty != null && BooksBox != null)
             {
-                BooksBox.Items.SortDescriptions[0] = new SortDescription(SortProperty, ListSortDirection.Ascending);
+                BooksBox.Items.SortDescriptions[0] = new SortDescription(sortProperty, ListSortDirection.Ascending);
             }
         }
 

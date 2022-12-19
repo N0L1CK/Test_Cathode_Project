@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Bookcase.View"
         mc:Ignorable="d"
         Title="Bookcase" Height="670" Width="420"
         WindowStyle="None"
@@ -18,15 +17,15 @@
     <Border Height="650" Width="400" CornerRadius="10" BorderThickness="1">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="{DynamicResource defaultBackColor2}" Offset="0.15"/>
-                <GradientStop Color="{DynamicResource defaultBackColor}" Offset="0.5"/>
+                <GradientStop Color="{DynamicResource DefaultBackColor2}" Offset="0.15"/>
+                <GradientStop Color="{DynamicResource DefaultBackColor}" Offset="0.5"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="{DynamicResource defaultBackColor1}" Offset="0"/>
-                <GradientStop Color="{DynamicResource defaultBackColor}" Offset="0.6"/>
-                <GradientStop Color="{DynamicResource defaultBackColor3}" Offset="1"/>
+                <GradientStop Color="{DynamicResource DefaultBackColor1}" Offset="0"/>
+                <GradientStop Color="{DynamicResource DefaultBackColor}" Offset="0.6"/>
+                <GradientStop Color="{DynamicResource DefaultBackColor3}" Offset="1"/>
 
             </LinearGradientBrush>
         </Border.Background>
@@ -50,8 +49,7 @@
                         Grid.Column="0"
                         Background="Transparent"
                         Click="Settings_Click">
-                    <Image Source="../Styles/settings.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality">
-                    </Image>
+                    <Image Source="../Styles/settings.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality" />
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="18"/>
@@ -110,7 +108,7 @@
                          BorderThickness="0"
                          Margin="0,20,0,0"
                          Background="Transparent" 
-                         VirtualizingPanel.ScrollUnit="Pixel">
+                         VirtualizingPanel.ScrollUnit="Pixel" d:DataContext="{d:DesignData }">
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -121,8 +119,8 @@
                                     HorizontalAlignment="Center">
                                 <Border.BorderBrush>
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                        <GradientStop Color="{DynamicResource defaultBackColor1}" Offset="0.1"/>
-                                        <GradientStop Color="{DynamicResource defaultBackColor3}" Offset="0.4"/>
+                                        <GradientStop Color="{DynamicResource DefaultBackColor1}" Offset="0.1"/>
+                                        <GradientStop Color="{DynamicResource DefaultBackColor3}" Offset="0.4"/>
                                     </LinearGradientBrush>
                                 </Border.BorderBrush>
                                 <StackPanel Width="290" 
@@ -160,31 +158,34 @@
                                             Grid.Column="0" 
                                             FontSize="16" 
                                             Foreground="{StaticResource TexColor}"/>
-                                        <TextBlock Grid.Column="1"  
+                                        <TextBlock Grid.Row="0" Grid.Column="1"  
                                                    Foreground="{StaticResource TexColor}" 
                                                    FontSize="16" Text="{Binding Path=Name}" 
                                                    HorizontalAlignment="Center" 
-                                                   TextWrapping="Wrap" TextAlignment="Center">
-                                        </TextBlock>
+                                                   TextWrapping="Wrap" TextAlignment="Center"
+                                                   d:DataContext="{d:DesignData }" />
                                         <TextBlock Grid.Row="1" 
                                                    Grid.Column="1" 
                                                    Foreground="{StaticResource TexColor}" 
                                                    FontSize="16" Text="{Binding Path=Author}" 
                                                    HorizontalAlignment="Center" 
-                                                   TextWrapping="Wrap" TextAlignment="Center"/>
+                                                   TextWrapping="Wrap" TextAlignment="Center"
+                                                   d:DataContext="{d:DesignData }" />
                                         <TextBlock Grid.Row="2" 
                                                    Grid.Column="1" 
                                                    Foreground="{StaticResource TexColor}" 
                                                    FontSize="16" Text="{Binding Path=DateEdition}" 
                                                    HorizontalAlignment="Center" 
-                                                   TextWrapping="Wrap" TextAlignment="Center"/>
+                                                   TextWrapping="Wrap" TextAlignment="Center"
+                                                   d:DataContext="{d:DesignData }" />
                                         <TextBlock Name="TBGenre" 
                                                    Grid.Row="3" 
                                                    Grid.Column="1" 
                                                    Foreground="{StaticResource TexColor}" 
                                                    FontSize="16" Text="{Binding Path=Genre}" 
                                                    HorizontalAlignment="Center" 
-                                                   TextWrapping="Wrap" TextAlignment="Center"/>
+                                                   TextWrapping="Wrap" TextAlignment="Center"
+                                                   d:DataContext="{d:DesignData }" />
                                     </Grid>
                                 </StackPanel>
                                 <Border.Style>
@@ -241,7 +242,7 @@
                     BorderThickness="0"
                     Command="{Binding EditCommand}" 
                     Grid.Column="0" 
-                    CommandParameter="{Binding SelectedBook}">
+                    CommandParameter="{Binding SelectedBook}" d:DataContext="{d:DesignData }">
                     <Image Source="../Styles/edit-button.png" 
                            Height="28" Width="28" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>
@@ -255,7 +256,7 @@
                 <Button 
                     Background="dodgerblue" 
                     BorderThickness="0"
-                    Command="{Binding AddCommand}" Grid.Column="1">
+                    Command="{Binding AddCommand}" Grid.Column="1" d:DataContext="{d:DesignData }">
                     <Image Source="../Styles/plus.png" 
                            Height="28" Width="28"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
@@ -270,7 +271,7 @@
                     Background="#E52B50" 
                     BorderThickness="0"
                     Command="{Binding DeleteCommand}" 
-                    CommandParameter="{Binding SelectedBook}" Grid.Column="2">
+                    CommandParameter="{Binding SelectedBook}" Grid.Column="2" d:DataContext="{d:DesignData }">
                     <Image Source="../Styles/bin.png" 
                            Height="28" Width="28" 
                            RenderOptions.BitmapScalingMode="HighQuality"/>

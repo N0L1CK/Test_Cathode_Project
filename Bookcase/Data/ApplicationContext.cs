@@ -7,24 +7,24 @@ namespace Bookcase.Data
 {
     class ApplicationContext : DbContext
     {
-        IDbConnection? dbConnection;
+        readonly IDbConnection? _dbConnection;
         public DbSet<Book> Books { get; set; } = null!;
+
         /// <summary>
         /// Configuration connection
         /// </summary>
-        /// <param name="optionsBuilder"></param>
         public ApplicationContext(IDbConnection connection)
         {
-            dbConnection = connection;
+            _dbConnection = connection;
         }
         public ApplicationContext()
         {
-            dbConnection = null;
+            _dbConnection = null;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (dbConnection == null) optionsBuilder.UseSqlite("Data Source=Database.db");
-            else optionsBuilder.UseSqlServer(dbConnection.ConnectionString);
+            if (_dbConnection == null) optionsBuilder.UseSqlite("Data Source=Database.db");
+            else optionsBuilder.UseSqlServer(_dbConnection.ConnectionString);
         }
         /// <summary>
         /// Configuration Entity

@@ -6,12 +6,12 @@ using System.Windows.Input;
 namespace Bookcase.View
 {
     /// <summary>
-    /// Логика взаимодействия для BookWindow.xaml
+    /// Logic for BookWindow.xaml
     /// </summary>
-    public partial class BookWindow : Window
+    public partial class BookWindow
     {
         public Book Book { get; private set; }
-        private int _noOfErrorsOnScreen = 0;
+        private int _noOfErrorsOnScreen;
         public BookWindow(Book book)
         {
             InitializeComponent();
@@ -23,7 +23,7 @@ namespace Bookcase.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void Accept_Click(object sender, RoutedEventArgs e)
+        private void Accept_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
         }
@@ -53,18 +53,14 @@ namespace Bookcase.View
             else
                 _noOfErrorsOnScreen--;
 
-            Save.IsEnabled = _noOfErrorsOnScreen > 0 ? false : true;
+            Save.IsEnabled = _noOfErrorsOnScreen <= 0;
 
         }
 
         private void DateText_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            if (DateText.Text.Length == 0)
-                DateText.Text = "0";
-            else 
-            {
-                DateText.Text = DateText.Text.Replace(" ", "");
-            }
+            DateText.Text = DateText.Text.Length == 0 ?
+                "0" : DateText.Text.Replace(" ", "");
         }
 
         private void DateText_KeyDown(object sender, KeyEventArgs e)
@@ -74,7 +70,7 @@ namespace Bookcase.View
             {
                 e.Handled = false;
             }
-            else 
+            else
             {
                 e.Handled = true;
             }

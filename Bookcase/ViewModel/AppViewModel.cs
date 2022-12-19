@@ -13,19 +13,19 @@ namespace Bookcase.ViewModel
 {
     public class AppViewModel : INotifyPropertyChanged
     {
-        readonly ApplicationContext db = new();
-        ICommand? addCommand;
-        ICommand? editCommand;
-        ICommand? deleteCommand;
-        private Book? selectedBook;
+        private readonly ApplicationContext _db = new();
+        private ICommand? _addCommand;
+        private ICommand? _editCommand;
+        private ICommand? _deleteCommand;
+        private Book? _selectedBook;
         public ObservableCollection<Book> Books { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public AppViewModel()
         {
-            db.Database.EnsureCreated();
-            db.Books.Load();
-            Books = db.Books.Local.ToObservableCollection();
+            _db.Database.EnsureCreated();
+            _db.Books.Load();
+            Books = _db.Books.Local.ToObservableCollection();
         }
         /// <summary>
         /// Command Add Book
@@ -34,22 +34,20 @@ namespace Bookcase.ViewModel
         {
             get
             {
-                return addCommand ??= new Command((obj) =>
+                return _addCommand ??= new Command((_) =>
                 {
                     BookWindow bookWindow = new(new Book());
-                    if (bookWindow.ShowDialog() == true)
+                    if (bookWindow.ShowDialog() != true) return;
+                    try
                     {
-                        try
-                        {
-                            Book book = bookWindow.Book;
-                            db.Books.Add(book);
-                            db.SaveChanges();
-                        }
-                        catch (Exception e)
-                        {
-                            MessageBox.Show($"Error: {e.Message}", "Error",
-                                MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-                        }
+                        var book = bookWindow.Book;
+                        _db.Books.Add(book);
+                        _db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show($"Error: {e.Message}", "Error",
+                            MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                     }
                 });
             }
@@ -61,7 +59,7 @@ namespace Bookcase.ViewModel
         {
             get
             {
-                return editCommand ??= new Command((selectedItem) =>
+                return _editCommand ??= new Command((selectedItem) =>
                 {
                     if (selectedItem is not Book book) return;
                     Book vm = new()
@@ -74,24 +72,22 @@ namespace Bookcase.ViewModel
                     };
                     BookWindow bookWindow = new(vm);
 
-                    if (bookWindow.ShowDialog() == true)
+                    if (bookWindow.ShowDialog() != true) return;
+                    book.Name = bookWindow.Book.Name;
+                    book.Author = bookWindow.Book.Author;
+                    book.DateEdition = bookWindow.Book.DateEdition;
+                    book.Genre = bookWindow.Book.Genre;
+                    try
                     {
-                        book.Name = bookWindow.Book.Name;
-                        book.Author = bookWindow.Book.Author;
-                        book.DateEdition = bookWindow.Book.DateEdition;
-                        book.Genre = bookWindow.Book.Genre;
-                        try
-                        {
-                            db.Entry(book).State = EntityState.Modified;
-                            db.SaveChanges();
-                        }
-                        catch (Exception e)
-                        {
-                            MessageBox.Show($"Error: {e.Message}", "Error", 
-                                MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-                        }
+                        _db.Entry(book).State = EntityState.Modified;
+                        _db.SaveChanges();
                     }
-                }, (selectedItem) => Books.Count > 0);
+                    catch (Exception e)
+                    {
+                        MessageBox.Show($"Error: {e.Message}", "Error",
+                            MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    }
+                }, (_) => Books.Count > 0);
             }
         }
         /// <summary>
@@ -101,27 +97,25 @@ namespace Bookcase.ViewModel
         {
             get
             {
-                return deleteCommand ??= new Command(obj =>
+                return _deleteCommand ??= new Command(obj =>
                 {
                     if (obj is not Book book) return;
                     var res = (MessageBox.Show("Are you sure?", "Delete",
                         MessageBoxButton.YesNo, MessageBoxImage.Question,
                         MessageBoxResult.No)).ToString();
-                    if (res == "Yes")
+                    if (res != "Yes") return;
+                    try
                     {
-                        try
-                        {
-                            db.Books.Remove(book);
-                            db.SaveChanges();
-                        }
-                        catch (Exception e)
-                        {
-                            MessageBox.Show($"Error: {e.Message}", "Error",
-                                MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-                        }
+                        _db.Books.Remove(book);
+                        _db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show($"Error: {e.Message}", "Error",
+                            MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                     }
                 },
-                (obj) => Books.Count > 0);
+                (_) => Books.Count > 0);
             }
         }
 
@@ -130,11 +124,11 @@ namespace Bookcase.ViewModel
         /// </summary>
         public Book? SelectedBook
         {
-            get { return selectedBook; }
+            get => _selectedBook;
             set
             {
-                selectedBook = value;
-                OnPropertyChanged("SelectedBook");
+                _selectedBook = value;
+                OnPropertyChanged();
             }
         }
         /// <summary>
@@ -142,8 +136,7 @@ namespace Bookcase.ViewModel
         /// </summary>
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
-            if (PropertyChanged != null)
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 

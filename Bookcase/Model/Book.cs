@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 
@@ -11,53 +12,53 @@ namespace Bookcase.Model
 
 
         public int Id { get; set; }
-        private string? name;
-        private int dateEdition;
-        private string? author;
-        private string? genre;
-        readonly TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+        private string? _name;
+        private int _dateEdition;
+        private string? _author;
+        private string? _genre;
+        private readonly TextInfo _ti = CultureInfo.CurrentCulture.TextInfo;
 
         public string? Name
         {
-            get { return name; }
+            get => _name;
             set
             {
-                if (name != value && value != null)
-                    name = ti.ToTitleCase(str: value.ToLower()).ToString();
-                OnPropertyChanged(nameof(Name));
+                if (_name != value && value != null)
+                    _name = _ti.ToTitleCase(str: value.ToLower());
+                OnPropertyChanged();
 
             }
         }
         public int DateEdition
         {
-            get { return dateEdition; }
+            get => _dateEdition;
             set
             {
-                
-                dateEdition = value;
-                OnPropertyChanged(nameof(DateEdition));
+
+                _dateEdition = value;
+                OnPropertyChanged();
 
             }
         }
         public string? Author
         {
-            get { return author; }
+            get => _author;
             set
             {
-                if (author != value && value != null)
-                    author = ti.ToTitleCase(str: value.ToLower()).ToString();
-                OnPropertyChanged(nameof(Author));
+                if (_author != value && value != null)
+                    _author = _ti.ToTitleCase(str: value.ToLower());
+                OnPropertyChanged();
 
             }
         }
         public string? Genre
         {
-            get { return genre; }
+            get => _genre;
             set
             {
-                if (genre != value && value != null)
-                    genre = ti.ToTitleCase(str: value.ToLower()).ToString();
-                OnPropertyChanged(nameof(Genre));
+                if (_genre != value && value != null)
+                    _genre = _ti.ToTitleCase(str: value.ToLower());
+                OnPropertyChanged();
 
             }
         }
@@ -73,18 +74,18 @@ namespace Bookcase.Model
         {
             get
             {
-                string error = String.Empty;
+                var error = string.Empty;
                 switch (columnName)
                 {
                     case "DateEdition":
-                        if ((DateEdition < 1564) || (DateEdition > (int)DateTime.Now.Year))
+                        if ((DateEdition < 1564) || (DateEdition > DateTime.Now.Year))
                         {
                             error = "Wrong date of edition";
                         }
                         break;
                     case "Name":
 
-                        if (String.IsNullOrWhiteSpace(Name))
+                        if (string.IsNullOrWhiteSpace(Name))
                         {
                             error = "Wrong Name of book";
                         }
@@ -114,23 +115,7 @@ namespace Bookcase.Model
 
         public static bool IsNumeric(string? s)
         {
-
-            if (!String.IsNullOrWhiteSpace(s))
-            {
-                foreach (char c in s)
-                {
-                    if (c >= '0' && c <= '9')
-                    {
-                        return true;
-                    }
-                }
-            }
-            else
-            {
-                return true;
-            }
-
-            return false;
+            return string.IsNullOrWhiteSpace(s) || s.Any(c => c is >= '0' and <= '9');
         }
     }
 }

@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!---Background Colors-->
-    <Color x:Key="defaultBackColor">#191970</Color>
-    <Color x:Key="defaultBackColor1">#4169E1</Color>
-    <Color x:Key="defaultBackColor2">#7793e6</Color>
-    <Color x:Key="defaultBackColor3">#031240</Color>
+    <Color x:Key="DefaultBackColor">#191970</Color>
+    <Color x:Key="DefaultBackColor1">#4169E1</Color>
+    <Color x:Key="DefaultBackColor2">#7793e6</Color>
+    <Color x:Key="DefaultBackColor3">#031240</Color>
 
     <!---Text Color-->
     <SolidColorBrush  x:Key="TexColor">#FFFFFF</SolidColorBrush>
